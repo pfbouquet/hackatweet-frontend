@@ -9,9 +9,12 @@ const SignUpModal = dynamic(() => import("../components/SignUpModal"), { ssr: fa
 
 const Sign = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const showModal = () => setIsModalVisible(true);
   const handleCancel = () => setIsModalVisible(false);
+
+  const [isModalInVisible, setIsModalInVisible] = useState(false);
+  const showModalIn = () => setIsModalInVisible(true);
+  const handleCancelIn = () => setIsModalInVisible(false);
 
   return (
     <div className={styles.container}>
@@ -27,13 +30,13 @@ const Sign = () => {
           Kick up
         </button>
         <p className={styles.accountText}>Tu as déjà un account?</p>
-        <button className={`${styles.btn} ${styles.secondary}`} onClick={showModal}>
+        <button className={`${styles.btn} ${styles.secondary}`} onClick={showModalIn}>
           Kick in
         </button>
       </div>
 
       {/* Intégration de la modale */}
-      <SignInModal visible={isModalVisible} onCancel={handleCancel} />
+      <SignInModal visible={isModalInVisible} onCancel={handleCancelIn} />
       <SignUpModal visible={isModalVisible} onCancel={handleCancel} />
     </div>
   );
