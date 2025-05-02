@@ -24,6 +24,13 @@
     color: white;
   }
   
+  .inputpassword {
+    margin-bottom: 15px;
+    /* background-color: #1e2732; */
+    border: 1px solid #2f3a46;
+    color: white;
+  }
+
   .input::placeholder {
     color: #8899a6;
   }
