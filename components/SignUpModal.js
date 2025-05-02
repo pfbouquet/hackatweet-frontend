@@ -1,9 +1,9 @@
-// SignInModal.js
+// SignUpModal.js
 import React from 'react';
 import { Modal, Input, Button } from 'antd';
-import styles from '../styles/SignInModal.module.css';
+import styles from '../styles/SignUpModal.module.css';
 
-const SignInModal = ({ visible, onCancel }) => {
+const SignUpModal = ({ visible, onCancel }) => {
   return (
     <Modal
       open={visible}
@@ -15,15 +15,16 @@ const SignInModal = ({ visible, onCancel }) => {
     >
       <div className={styles.content}>
         <img src="/logo_white.webp" alt="Logo" className={styles.logo} />
-        <h2>Kicknect toi sur ton account</h2>
+        <h2>Create ton kick account</h2>
+        <Input className={styles.input} placeholder="Premiername" />
         <Input placeholder="Kickername" className={styles.input} />
         <Input.Password placeholder="JCVDMDP" className={styles.input} />
         <Button type="primary" className={styles.signupButton}>
-          Kick in
+          Kick up
         </Button>
       </div>
     </Modal>
   );
 };
 
-export default SignInModal;
+export default SignUpModal;
