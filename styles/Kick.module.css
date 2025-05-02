@@ -1,24 +1,28 @@
-.imgLogin{
-    width: 60px;
-    height: 60px;
-    padding: 0px;
-    margin-right: 20px;
-    background-color: white;
-    border-radius: 50px;
+.imgLogin {
+  width: 60px;
+  height: 60px;
+  padding: 0px;
+  margin-right: 20px;
+  background-color: white;
+  border-radius: 50px;
 }
 
-.kick{
-    display: flex;
-    flex-direction: column;
-    border: solid 1px grey;
-    padding: 10px;
+.kick {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px grey;
+  padding: 10px;
 }
 
-.kicker{
-    display: flex;
+.kicker {
+  display: flex;
 }
 
-.like{
-    display: flex;
-    align-items: center;
+.like {
+  display: flex;
+  align-items: center;
+}
+
+.liked {
+  color: red;
 }

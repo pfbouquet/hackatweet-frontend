@@ -1,29 +1,59 @@
-import styles from '../styles/Home.module.css';
-import Kick from './Kick'
-import Trend from './Trend'
+import { useEffect, useState } from "react";
 
-let kickData = [
-  {
-    username: "JCVD",
-    firstname: "Jean-Claude",
-    message: "Ceci est mon kick :)",
-    nbLikes: 5,
-  },
-  {
-    username: "JCVD",
-    firstname: "Jean-Claude",
-    message: "Qui kickera kickera.",
-    nbLikes: 0,
-  },
-];
+import styles from "../styles/Home.module.css";
+import Kick from "./Kick";
+import Trend from "./Trend";
+
+const BACKEND_URL = "http://localhost:3000";
+const usertoken = "2cjNXWW2eXL65DpRO3_QPh6npQE9K2Wi";
 
 function Home() {
-  let kicks = kickData.map((k) => (
+  const [kickData, setKickData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
+  useEffect(() => {
+    console.log("Mount");
+    refreshUserkData();
+    refreshKickData();
+  }, []);
+
+  async function refreshKickData() {
+    fetch(`${BACKEND_URL}/kicks/all`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          setKickData(data.kicks);
+        }
+      });
+  }
+
+  async function refreshUserkData() {
+    fetch(`${BACKEND_URL}/users/${usertoken}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          setUserData(data.user);
+        }
+      });
+  }
+
+  function likeClicked() {
+    refreshKickData();
+    refreshUserkData();
+  }
+
+  let kicks = kickData.map((k, i) => (
     <Kick
-      username={k.username}
-      firstname={k.firstname}
+      key={i}
+      id={k._id}
+      username={k.author.username}
+      firstname={k.author.firstname}
       message={k.message}
       nbLikes={k.nbLikes}
+      isLiked={userData.likedKicks.includes(k._id)}
+      likeClicked={likeClicked}
     />
   ));
 
@@ -60,10 +90,9 @@ function Home() {
 
       <div className={styles.rightContainer}>
         <h2>Trends</h2>
-          <div className={styles.blockTrends}>
-            <Trend />
-            
-          </div>
+        <div className={styles.blockTrends}>
+          <Trend />
+        </div>
       </div>
     </div>
   );
