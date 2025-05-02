@@ -1,7 +1,7 @@
 import Home from '../components/Home';
 
-function Index() {
-  return <Home />;
+function sign() {
+  return <Sign />;
 }
 
-export default Index;
+export default sign;
