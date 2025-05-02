@@ -6,7 +6,7 @@ const BACKEND_URL = "http://localhost:3000";
 const usertoken = "2cjNXWW2eXL65DpRO3_QPh6npQE9K2Wi";
 
 function formatRelativeTime(timestamp) {
-  const now = new Date().getTime() / 1000;
+  const now = Math.floor(Date.now() / 1000);
   const diff = Math.floor(now - timestamp); // en secondes
 
   if (diff < 60) {
