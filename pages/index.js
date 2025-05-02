@@ -1,7 +1,7 @@
-import Home from '../components/Home';
+import Sign from '../components/Sign';
 
-function sign() {
+function SignPage() {
   return <Sign />;
 }
 
-export default sign;
+export default SignPage;

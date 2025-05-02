@@ -1,0 +1,73 @@
+.container {
+    display: flex;
+    height: 100vh;
+  }
+  
+  .leftPanel {
+    flex: 1;
+    background: url('/background.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+  }
+  
+  .rightPanel {
+    flex: 1;
+    background-color: #0f1419;
+    color: white;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .smallLogo {
+    width: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .subtitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+  
+  .btn {
+    font-size: 16px;
+    padding: 12px 24px;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
+  .primary {
+    background-color: #1d9bf0;
+    color: white;
+  }
+  
+  .secondary {
+    background-color: transparent;
+    border: 1px solid #536471;
+    color: white;
+  }
+  
+  .accountText {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  

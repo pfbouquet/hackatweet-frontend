@@ -12,7 +12,7 @@ function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <Head>
-        <title>Next.js App</title>
+        <title>JCVkicks</title>
       </Head>
       <Component {...pageProps} />
     </Provider>
