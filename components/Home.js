@@ -1,5 +1,6 @@
 import styles from '../styles/Home.module.css';
 import Kick from './Kick'
+import Trend from './Trend'
 
 function Home() {
 
@@ -36,8 +37,10 @@ function Home() {
 
       <div className={styles.rightContainer}>
         <h2>Trends</h2>
-       
-
+          <div className={styles.blockTrends}>
+            <Trend />
+            
+          </div>
       </div>
     </div>
   );

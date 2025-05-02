@@ -1,17 +1,14 @@
-import styles from '../styles/Kick.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart} from '@fortawesome/free-solid-svg-icons';
+import styles from '../styles/Trend.module.css'
 
 function Kick(){
 
     return (
         <>
-            <div className={styles.blockTrends}>
+            <div className={styles.eachTrend}>
                 <h3>#BIM!</h3>
-                <h4>2 kicks</h4>
+                <h4 className={styles.h4}>2 kicks</h4>
             </div>
         </>
-        
     )
 
 }
