@@ -1,28 +1,27 @@
-import styles from '../styles/Kick.module.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart} from '@fortawesome/free-solid-svg-icons';
+import styles from "../styles/Kick.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-function Kick(){
+function Kick(props) {
+  let kickedAgo = "5 hours";
+  let userPic = "logo.webp";
 
-    return (
-        <>
-        <div className={styles.kick}>
-            <div className={styles.kicker}>
-              <img className={styles.imgLogin} src="logo.webp"/>
-              <h3>Jean-Claude</h3>
-              <h4>@JCVD - 5 hours</h4>
-            </div>
-              <p>Voici mon kick</p>
-              <div className={styles.like}>
-                <FontAwesomeIcon icon={faHeart}/>
-                <p>4</p>
-              </div>
-              
-          </div>
-        </>
-        
-    )
-
+  return (
+    <>
+      <div className={styles.kick}>
+        <div className={styles.kicker}>
+          <img className={styles.imgLogin} src={userPic} />
+          <h3>{props.firstname}</h3>
+          <h4>{`@${props.username} - ${kickedAgo}`}</h4>
+        </div>
+        <p>{props.message}</p>
+        <div className={styles.like}>
+          <FontAwesomeIcon icon={faHeart} />
+          <p>{props.nbLikes}</p>
+        </div>
+      </div>
+    </>
+  );
 }
 
 export default Kick;
