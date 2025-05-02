@@ -1,0 +1,126 @@
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+/* global css > grid */
+.leftContainer{
+    border: solid 1px red;
+    grid-row-start: 1;
+    grid-row-end: 13;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.middleContainer{
+    border: solid 1px red;
+    grid-row-start: 1;
+    grid-row-end: 13;
+    grid-column-start: 4;
+    grid-column-end: 9;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+}
+
+.rightContainer{
+    border: solid 1px red;
+    grid-row-start: 1;
+    grid-row-end: 13;
+    grid-column-start: 9;
+    grid-column-end: 13;
+    display: flex;
+    justify-content: center;
+    align-items: space-between;
+}
+
+/* left css */
+.logo{
+    width: 150px;
+    height: 150px;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgLogin{
+    width: 60px;
+    height: 60px;
+    padding: 0px;
+    margin-right: 20px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+.txtLogin{
+
+}
+
+
+/* middle css > addKick */
+.addKick{
+    border: solid 1px green;
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 13;
+    display: flex;
+    flex-direction: column;
+}
+
+.textKick{
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    max-height: 100px;  
+    margin: 10px;
+}
+
+.countAndKick{
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+}
+
+.btnKick{
+    margin-left: 10px;
+    width: 100px;
+    background-color: black;
+    color:white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+.btnKick:hover{
+    background-color: white;
+    color: black;
+}
+
+
+/* middle css > Feed */
+.feed{
+    border: solid 1px green;
+    grid-row-start: 5;
+    grid-row-end: 13;
+    grid-column-start: 1;
+    grid-column-end: 13;
+}
+
+.kick{
+    
+}
+
+.kicker{
+    
+}
+

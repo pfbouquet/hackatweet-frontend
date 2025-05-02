@@ -1,4 +1,4 @@
-import Home from '../components/Home';
+import Sign from '../components/Sign';
 
 function sign() {
   return <Sign />;
