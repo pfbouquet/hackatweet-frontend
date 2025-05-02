@@ -37,8 +37,7 @@
     grid-column-start: 9;
     grid-column-end: 13;
     display: flex;
-    justify-content: center;
-    align-items: space-between;
+    flex-direction: column;
 }
 
 /* left css */
@@ -69,13 +68,14 @@
 
 /* middle css > addKick */
 .addKick{
-    border: solid 1px green;
     grid-row-start: 1;
     grid-row-end: 5;
     grid-column-start: 1;
     grid-column-end: 13;
     display: flex;
     flex-direction: column;
+    border:1px solid grey;
+    padding: 10px;
 }
 
 .textKick{
@@ -109,18 +109,16 @@
 
 /* middle css > Feed */
 .feed{
-    border: solid 1px green;
     grid-row-start: 5;
     grid-row-end: 13;
     grid-column-start: 1;
     grid-column-end: 13;
+    display: flex;
+    flex-direction: column;
 }
 
-.kick{
-    
-}
 
-.kicker{
-    
+/* right css */
+.blockTrends{
+    background-color: grey;
 }
-
