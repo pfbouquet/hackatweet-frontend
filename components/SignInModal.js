@@ -30,10 +30,10 @@ const SignInModal = ({ visible, onCancel }) => {
       if (data.result) {
         dispatch(
           login({
-            firstname: data.firstname,
-            token: data.token,
-            username: data.username,
-            likedKicks: data.likedKicks,
+            firstname: data.user.firstname,
+            token: data.user.token,
+            username: data.user.username,
+            likedKicks: data.user.likedKicks,
           })
         );
         // ✅ Réinitialise les champs et erreurs

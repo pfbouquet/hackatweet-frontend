@@ -1,9 +1,9 @@
+import { useSelector } from "react-redux";
 import styles from "../styles/Kick.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const BACKEND_URL = "http://localhost:3000";
-const usertoken = "2cjNXWW2eXL65DpRO3_QPh6npQE9K2Wi";
 
 function formatRelativeTime(timestamp) {
   const now = Math.floor(Date.now() / 1000);
@@ -24,6 +24,7 @@ function formatRelativeTime(timestamp) {
 }
 
 function Kick(props) {
+  const user = useSelector((store) => store.user.value);
   let kickedAgo = formatRelativeTime(props.sentAt);
   let userPic = "logo.webp";
 
@@ -33,7 +34,7 @@ function Kick(props) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        likerToken: usertoken,
+        likerToken: user.token,
         kickId: props.id,
       }),
     });

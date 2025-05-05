@@ -16,7 +16,6 @@ function Home() {
   useEffect(() => {
     console.log("Mount");
     refreshView();
-    console.log(user);
   }, []);
 
   async function refreshView() {
