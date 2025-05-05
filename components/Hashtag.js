@@ -1,27 +1,34 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setTrendsData } from "../reducers/trendsData";
+import { setKicksData } from "../reducers/kicksData";
+import { setLikedKicks } from "../reducers/likedKicks";
+import { clickTrend } from "../reducers/trend";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Hashtag.module.css";
 import Kick from "./Kick";
 import Trend from "./Trend";
 
 const BACKEND_URL = "http://localhost:3000";
 
 function Hashtag() {
-  const [kickData, setKickData] = useState([]);
-  const [textKick, setTextKick] = useState([]);
-  const [textLength, setTextLength] = useState(0);
-  const [lickedKick, setLickedKick] = useState([]);
-  const [trendsData, setTrendsData] = useState([])
+  const trend = useSelector((store)=> store.trend.value)
+  const [text, setText]= useState(trend)
+  const [trendsData, setTrendsData]= useState([])
+  const [kicksData, setKicksData] = useState([])
   const user = useSelector((store) => store.user.value);
+  const likedKicks = useSelector((store) => store.likedKicks.value);
+  const dispatch = useDispatch();
+
+console.log(text,trendsData,user)
 
   useEffect(() => {
     console.log("Mount");
     refreshView();
-  }, [user]);
+  }, [user, trend]);
 
   async function refreshView() {
-    await refreshLickedKick();
+    // await refreshLickedKick();
     await refreshKickData()
     seeTrends();
   }
@@ -31,62 +38,58 @@ function Hashtag() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setKickData(data.kicks);
+          setKicksData(data.kicks);
         }
       })
-      .then(console.log("kickData refreshed"));
+      .then(console.log("kickData refreshed", kicksData));
   }
 
-  async function refreshLickedKick() {
-    fetch(`${BACKEND_URL}/users/${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          console.log(data);
-          setLickedKick(data.user.likedKicks);
-        }
-      });
-  }
+  // async function refreshLickedKick() {
+  //   fetch(`${BACKEND_URL}/users/${user.token}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.result) {
+  //         console.log(data);
+  //         setLickedKick(data.user.likedKicks);
+  //       }
+  //     });
+  // }
 
-  async function likeClicked() {
-    refreshView();
-  }
+  // async function likeClicked() {
+  //   refreshView();
+  // }
 
   async function deleteClicked() {
     refreshView();
   }
 
-  async function zbamClicked() {
-    let response = await fetch(`${BACKEND_URL}/kicks/new`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: user.token,
-        message: textKick,
-      }),
-    });
-    refreshView();
-    }
+  let filterTrend= trendsData.filter((e) => text === e.name)[0]
+  console.log('filterTREND',filterTrend)
 
-  // let kicks = kickData
-  //   .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
-  //   .map((k, i) => {
-  //     return (
-  //       <Kick
-  //         key={i}
-  //         id={k._id}
-  //         username={k.author.username}
-  //         firstname={k.author.firstname}
-  //         message={k.message}
-  //         nbLikes={k.nbLikes}
-  //         sentAt={k.sentAtTimestamp}
-  //         isLiked={lickedKick.includes(k._id)}
-  //         isAuthor={k.author.username === user.username}
-  //         likeClicked={likeClicked}
-  //         deleteClicked={deleteClicked}
-  //       />
-  //     );
-  //   });
+  let kicks=[]
+  if(filterTrend){
+    kicks = kicksData
+    .filter(e => filterTrend.kicks.includes(e._id))
+    .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
+    .map((k, i) => {
+      return (
+        <Kick
+          key={i}
+          id={k._id}
+          username={k.author.username}
+          firstname={k.author.firstname}
+          message={k.message}
+          nbLikes={k.nbLikes}
+          sentAt={k.sentAtTimestamp}
+          // isLiked={lickedKick.includes(k._id)}
+          isAuthor={k.author.username === user.username}
+          // likeClicked={likeClicked}
+          deleteClicked={deleteClicked}
+        />
+      );
+    });
+  }
+  
 
   //fetch for grab DB informations
   function seeTrends(){
@@ -95,54 +98,45 @@ function Hashtag() {
       .then(data => {
         setTrendsData(data.trends)
       })
-      
+        console.log(trendsData)
   }
 
-  //reorder trends by number of trends
-  const orderTrends = trendsData.sort((a, b) => b.kicks.length - a.kicks.length).slice(0,5)
-  // filter trends if there is 0 kick
-  const filterZeroTrends = orderTrends.filter((data) => data.kicks.length !== 0)
-  //map order
-  const allTrends = filterZeroTrends.map((data,i)=>{
-    return <Trend key={i} name={data.name} kicks={data.kicks.length}/>
-  })
+
+    //reorder trends by number of trends
+    const orderTrends = trendsData.sort((a, b) => b.kicks.length - a.kicks.length).slice(0,5)
+    // filter trends if there is 0 kick
+    const filterZeroTrends = orderTrends.filter((data) => data.kicks.length !== 0)
+    //map order
+    const allTrends = filterZeroTrends.map((data,i)=>{
+      return <Trend key={i} name={data.name} kicks={data.kicks.length} onClick={()=> dispatch(clickTrend(data.name))
+      }/>
+    })
   
 
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <img src="logo.webp" className={styles.logo} />
+        <img src="logo_white.webp" className={styles.logo} />
         <div className={styles.user}>
           <img className={styles.imgLogin} src="logo.webp" />
           <div className={styles.txtLogin}>
-            <h3>{user.firstname}</h3>
-            <h4>@{user.username}</h4>
+            <h3 className={styles.H3}>{user.firstname}</h3>
+            <h4 className={styles.H4}>@{user.username}</h4>
           </div>
         </div>
       </div>
 
       <div className={styles.middleContainer}>
         <div className={styles.addKick}>
-          <h2>Hashtag</h2>
-          <textarea
-            className={styles.textKick}
-            rows="1"
-            cols="33"
-            label="Let's kick it!"
-            value={textKick}
-            onChange={(e) => {
-              setTextKick(e.target.value.slice(0, 280));
-              setTextLength(e.target.value.length);
-            }}
-          ></textarea>
-
+          <h2 className={styles.H2}>Hashtag</h2>
+          <input className={styles.input} type="text" onChange={(e)=> setText(e.target.value)} value={text} />
         </div>
 
-        {/* <div className={styles.feed}>{kicks}</div> */}
+        <div className={styles.feed}>{kicks}</div>
       </div>
 
       <div className={styles.rightContainer}>
-        <h2>Trends</h2>
+        <h2 className={styles.H2}>Trends</h2>
         <div className={styles.blockTrends}>{allTrends}</div>
       </div>
     </div>

@@ -1,0 +1,170 @@
+.H2{
+    color: rgb(228, 226, 232);
+}
+
+.H3{
+    color: rgb(228, 226, 232);
+}
+
+.H4{
+    color: rgb(228, 226, 232);
+}
+
+.txtLogin{
+    color: rgb(228, 226, 232);
+}
+
+.container{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    background-color: rgb(49, 49, 59);
+    color: rgb(228, 226, 232);
+}
+
+/* global css > grid */
+.leftContainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 25vw; /* ou une valeur fixe comme 300px si tu préfères */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(49, 49, 59); /* Pour garder le fond en scroll */
+    color: rgb(228, 226, 232);
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.middleContainer{
+    /* border: solid 1px black; */
+    position: relative;
+    grid-row-start: 1;
+    grid-row-end: 13;
+    grid-column-start: 4;
+    grid-column-end: 9;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(49, 49, 59); /* s'étend toujours avec le contenu */
+    min-height: 100vh;
+    padding: 20px;
+    overflow: auto;
+    color: rgb(228, 226, 232);
+}
+
+.rightContainer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 25vw; /* ou une valeur fixe comme 300px */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 20px;
+    background-color: rgb(49, 49, 59); /* même fond pour continuité */
+    color: rgb(228, 226, 232);
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.kicks{
+    color: rgb(228, 226, 232);
+}
+
+/* left css */
+.logo{
+    width: 150px;
+    height: 150px;
+}
+
+.user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(228, 226, 232);
+}
+
+.imgLogin{
+    width: 60px;
+    height: 60px;
+    padding: 0px;
+    margin-right: 20px;
+    background-color: white;
+    border-radius: 50px;
+}
+
+
+/* middle css > addKick */
+.addKick{
+    grid-row-start: 1;
+    grid-row-end: 5;
+    grid-column-start: 1;
+    grid-column-end: 13;
+    display: flex;
+    /* position: fixed; */
+    flex-direction: column;
+    /* border:1px solid grey; */
+    padding: 10px;
+}
+
+.textKick{
+    resize: none;
+    overflow: hidden;
+    min-height: 50px;
+    max-height: 100px;  
+    margin: 10px;
+    color: black;
+}
+
+.countAndKick{
+    display: flex;
+    justify-content: flex-end;
+    margin: 10px;
+    color: rgb(228, 226, 232);
+}
+
+.btnKick{
+    margin-left: 10px;
+    width: 100px;
+    background-color: black;
+    color:white;
+    border-radius: 50px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+.btnKick:hover{
+    background-color: white;
+    color: black;
+}
+
+
+/* middle css > Feed */
+.feed{
+    grid-row-start: 5;
+    grid-row-end: 13;
+    grid-column-start: 1;
+    grid-column-end: 13;
+    display: flex;
+    flex-direction: column;
+    color: rgb(228, 226, 232);
+}
+
+
+/* right css */
+.blockTrends{
+    background-color: grey;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.input{
+    color: black;
+}
