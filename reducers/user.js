@@ -1,7 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const BACKEND_URL = "http://localhost:3000";
-
 const initialState = {
   value: { token: null, username: null, firstname: null, likedKicks: [] },
 };

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setKickData } from "../reducers/kickData";
 
 import styles from "../styles/Home.module.css";
 import Kick from "./Kick";
@@ -8,12 +9,13 @@ import Trend from "./Trend";
 const BACKEND_URL = "http://localhost:3000";
 
 function Home() {
-  const [kickData, setKickData] = useState([]);
   const [textKick, setTextKick] = useState([]);
   const [textLength, setTextLength] = useState(0);
   const [lickedKick, setLickedKick] = useState([]);
-  const [trendsData, setTrendsData] = useState([])
+  const [trendsData, setTrendsData] = useState([]);
   const user = useSelector((store) => store.user.value);
+  const kickData = useSelector((store) => store.kickData.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("Mount");
@@ -22,7 +24,7 @@ function Home() {
 
   async function refreshView() {
     await refreshLickedKick();
-    await refreshKickData()
+    await refreshKickData();
     seeTrends();
   }
 
@@ -31,7 +33,7 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setKickData(data.kicks);
+          dispatch(setKickData(data.kicks));
         }
       })
       .then(console.log("kickData refreshed"));
@@ -42,7 +44,6 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          console.log(data);
           setLickedKick(data.user.likedKicks);
         }
       });
@@ -66,9 +67,9 @@ function Home() {
       }),
     });
     refreshView();
-    }
+  }
 
-  let kicks = kickData
+  let kicks = [...kickData]
     .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
     .map((k, i) => {
       return (
@@ -89,24 +90,26 @@ function Home() {
     });
 
   //fetch for grab DB informations
-  function seeTrends(){
-      fetch(`${BACKEND_URL}/trends`)
-      .then(response => response.json())
-      .then(data => {
-        setTrendsData(data.trends)
-      })
-      
+  function seeTrends() {
+    fetch(`${BACKEND_URL}/trends`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTrendsData(data.trends);
+      });
   }
 
   //reorder trends by number of trends
-  const orderTrends = trendsData.sort((a, b) => b.kicks.length - a.kicks.length).slice(0,5)
+  const orderTrends = trendsData
+    .sort((a, b) => b.kicks.length - a.kicks.length)
+    .slice(0, 5);
   // filter trends if there is 0 kick
-  const filterZeroTrends = orderTrends.filter((data) => data.kicks.length !== 0)
+  const filterZeroTrends = orderTrends.filter(
+    (data) => data.kicks.length !== 0
+  );
   //map order
-  const allTrends = filterZeroTrends.map((data,i)=>{
-    return <Trend key={i} name={data.name} kicks={data.kicks.length}/>
-  })
-  
+  const allTrends = filterZeroTrends.map((data, i) => {
+    return <Trend key={i} name={data.name} kicks={data.kicks.length} />;
+  });
 
   return (
     <div className={styles.container}>

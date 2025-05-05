@@ -5,9 +5,10 @@ import "antd/dist/antd.css";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "../reducers/user";
+import kickData from "../reducers/kickData";
 
 const store = configureStore({
-  reducer: { user },
+  reducer: { user, kickData },
 });
 
 function App({ Component, pageProps }) {
