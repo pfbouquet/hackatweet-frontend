@@ -1,18 +1,36 @@
-.eachTrend{
-    cursor: pointer;
-}
 
 .eachTrend:hover{
     background-color: black;
+    cursor: pointer;
+    transition-duration: 0.5s;
+    /* display: flex;
+    flex-direction: column; */
+    
+}
+
+.eachTrend{
+    width: 300px;
+    /* margin-top: -10px; */
+    margin-bottom: 20px; /* Espacement entre les blocs */
+    /* border: solid 1px black; */
+    border-radius: 15px;
+    background-color: grey;
+    opacity: 0.7;
+    padding: 20px;
+    overflow: auto;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 .h3{
-    color: #2d2d2d;
-    font-size: 20px;    
-    width: 300px;
+    color: whitesmoke;
+    font-size: 20px;   
+
+    
 }
 
 .h4{
-    color: #2d2d2d;
-    margin-top:-10px
+    color: whitesmoke;
+    
 }

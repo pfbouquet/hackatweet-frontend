@@ -14,13 +14,18 @@
     color: rgb(228, 226, 232);
 }
 
-.container{
+.container {
     height: 100vh;
     width: 100vw;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
-    background-color: rgb(49, 49, 59);
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+    url('/wallpaperbetter.com_1280x800.png');
+    /* opacity: 0.2; */
+    background-size: cover; /* couvre tout l'écran */
+    background-position: center; /* centrée */
+    background-repeat: no-repeat; /* pas de répétition */
     color: rgb(228, 226, 232);
 }
 
@@ -35,7 +40,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(49, 49, 59); /* Pour garder le fond en scroll */
+    /* background-color: rgb(49, 49, 59); */
     color: rgb(228, 226, 232);
     padding: 20px;
     z-index: 1000;
@@ -51,7 +56,7 @@
     grid-column-end: 9;
     display: flex;
     flex-direction: column;
-    background-color: rgb(49, 49, 59); /* s'étend toujours avec le contenu */
+    /* background-color: rgb(49, 49, 59);  */
     min-height: 100vh;
     padding: 20px;
     overflow: auto;
@@ -69,7 +74,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     padding: 20px;
-    background-color: rgb(49, 49, 59); /* même fond pour continuité */
+    /* background-color: rgb(49, 49, 59); */
     color: rgb(228, 226, 232);
     overflow-y: auto;
     z-index: 1000;
@@ -160,7 +165,7 @@
 
 /* right css */
 .blockTrends{
-    background-color: grey;
+    /* background-color: grey; */
     padding: 10px;
     border-radius: 15px;
 }
