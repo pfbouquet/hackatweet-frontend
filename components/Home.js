@@ -11,15 +11,18 @@ function Home() {
   const [kickData, setKickData] = useState([]);
   const [textKick, setTextKick] = useState([]);
   const [textLength, setTextLength] = useState(0);
+  const [trendsData, setTrendsData] = useState([])
   const user = useSelector((store) => store.user.value);
 
   useEffect(() => {
     console.log("Mount");
     refreshView();
+    seeTrends()
   }, []);
 
   async function refreshView() {
-    await refreshKickData();
+    await refreshKickData()
+    seeTrends();
   }
 
   async function refreshKickData() {
@@ -50,7 +53,7 @@ function Home() {
       }),
     });
     refreshView();
-  }
+    }
 
   let kicks = kickData
     .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
@@ -71,6 +74,26 @@ function Home() {
         />
       );
     });
+
+  //fetch for grab DB informations
+  function seeTrends(){
+      fetch(`${BACKEND_URL}/trends`)
+      .then(response => response.json())
+      .then(data => {
+        setTrendsData(data.trends)
+      })
+      
+  }
+
+  //reorder trends by number of trends
+  const orderTrends = trendsData.sort((a, b) => b.kicks.length - a.kicks.length).slice(0,5)
+  // filter trends if there is 0 kick
+  const filterZeroTrends = orderTrends.filter((data) => data.kicks.length !== 0)
+  //map order
+  const allTrends = filterZeroTrends.map((data,i)=>{
+    return <Trend key={i} name={data.name} kicks={data.kicks.length}/>
+  })
+  
 
   return (
     <div className={styles.container}>
@@ -112,9 +135,7 @@ function Home() {
 
       <div className={styles.rightContainer}>
         <h2>Trends</h2>
-        <div className={styles.blockTrends}>
-          <Trend />
-        </div>
+        <div className={styles.blockTrends}>{allTrends}</div>
       </div>
     </div>
   );
