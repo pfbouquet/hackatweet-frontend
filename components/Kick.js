@@ -54,8 +54,8 @@ function Kick(props) {
       <div className={styles.kick}>
         <div className={styles.kicker}>
           <img className={styles.imgLogin} src={userPic} />
-          <h3>{props.firstname}</h3>
-          <h4>{`@${props.username} - ${kickedAgo}`}</h4>
+          <h3 className={styles.H3}>{props.firstname}</h3>
+          <h4 className={styles.H3}>{`@${props.username} - ${kickedAgo}`}</h4>
         </div>
         <p>{props.message}</p>
         <div className={styles.like}>
