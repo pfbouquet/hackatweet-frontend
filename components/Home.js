@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setKicksData } from "../reducers/kicksData";
+import { setTrendsData } from "../reducers/trendsData";
+import { setLikedKicks } from "../reducers/likedKicks";
 
 import styles from "../styles/Home.module.css";
 import Kick from "./Kick";
@@ -8,12 +11,13 @@ import Trend from "./Trend";
 const BACKEND_URL = "http://localhost:3000";
 
 function Home() {
-  const [kickData, setKickData] = useState([]);
   const [textKick, setTextKick] = useState([]);
   const [textLength, setTextLength] = useState(0);
-  const [lickedKick, setLickedKick] = useState([]);
-  const [trendsData, setTrendsData] = useState([])
   const user = useSelector((store) => store.user.value);
+  const kicksData = useSelector((store) => store.kicksData.value);
+  const trendsData = useSelector((store) => store.trendsData.value);
+  const likedKicks = useSelector((store) => store.likedKicks.value);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     console.log("Mount");
@@ -21,9 +25,9 @@ function Home() {
   }, [user]);
 
   async function refreshView() {
-    await refreshLickedKick();
-    await refreshKickData()
-    seeTrends();
+    await refreshLikedKicks();
+    await refreshKickData();
+    await seeTrends();
   }
 
   async function refreshKickData() {
@@ -31,21 +35,19 @@ function Home() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          setKickData(data.kicks);
+          dispatch(setKicksData(data.kicks));
         }
       })
       .then(console.log("kickData refreshed"));
   }
 
-  async function refreshLickedKick() {
-    fetch(`${BACKEND_URL}/users/${user.token}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          console.log(data);
-          setLickedKick(data.user.likedKicks);
-        }
-      });
+  async function refreshLikedKicks() {
+    let response = await fetch(`${BACKEND_URL}/users/${user.token}`);
+    let data = await response.json();
+    if (data.result) {
+      console.log(data.user.likedKicks);
+      await setLikedKicks(data.user.likedKicks);
+    }
   }
 
   async function likeClicked() {
@@ -66,9 +68,9 @@ function Home() {
       }),
     });
     refreshView();
-    }
+  }
 
-  let kicks = kickData
+  let kicks = [...kicksData]
     .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
     .map((k, i) => {
       return (
@@ -80,7 +82,7 @@ function Home() {
           message={k.message}
           nbLikes={k.nbLikes}
           sentAt={k.sentAtTimestamp}
-          isLiked={lickedKick.includes(k._id)}
+          isLiked={[...likedKicks].includes(k._id)}
           isAuthor={k.author.username === user.username}
           likeClicked={likeClicked}
           deleteClicked={deleteClicked}
@@ -89,24 +91,24 @@ function Home() {
     });
 
   //fetch for grab DB informations
-  function seeTrends(){
-      fetch(`${BACKEND_URL}/trends`)
-      .then(response => response.json())
-      .then(data => {
-        setTrendsData(data.trends)
-      })
-      
+  async function seeTrends() {
+    let response = await fetch(`${BACKEND_URL}/trends`);
+    let data = await response.json();
+    dispatch(setTrendsData(data.trends));
   }
 
   //reorder trends by number of trends
-  const orderTrends = trendsData.sort((a, b) => b.kicks.length - a.kicks.length).slice(0,5)
+  const orderTrends = [...trendsData]
+    .sort((a, b) => b.kicks.length - a.kicks.length)
+    .slice(0, 5);
   // filter trends if there is 0 kick
-  const filterZeroTrends = orderTrends.filter((data) => data.kicks.length !== 0)
+  const filterZeroTrends = orderTrends.filter(
+    (data) => data.kicks.length !== 0
+  );
   //map order
-  const allTrends = filterZeroTrends.map((data,i)=>{
-    return <Trend key={i} name={data.name} kicks={data.kicks.length}/>
-  })
-  
+  const allTrends = filterZeroTrends.map((data, i) => {
+    return <Trend key={i} name={data.name} kicks={data.kicks.length} />;
+  });
 
   return (
     <div className={styles.container}>
