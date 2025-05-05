@@ -5,10 +5,12 @@ import "antd/dist/antd.css";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import user from "../reducers/user";
-import kickData from "../reducers/kickData";
+import kicksData from "../reducers/kicksData";
+import trendsData from "../reducers/trendsData";
+import likedKicks from "../reducers/likedKicks";
 
 const store = configureStore({
-  reducer: { user, kickData },
+  reducer: { user, kicksData, trendsData, likedKicks },
 });
 
 function App({ Component, pageProps }) {
