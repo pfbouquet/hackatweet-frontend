@@ -38,6 +38,7 @@ function Kick(props) {
         kickId: props.id,
       }),
     });
+    let data = await response.json();
     // call parent for updating view
     props.likeClicked();
   }

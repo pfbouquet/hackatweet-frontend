@@ -11,14 +11,16 @@ function Home() {
   const [kickData, setKickData] = useState([]);
   const [textKick, setTextKick] = useState([]);
   const [textLength, setTextLength] = useState(0);
+  const [lickedKick, setLickedKick] = useState([]);
   const user = useSelector((store) => store.user.value);
 
   useEffect(() => {
     console.log("Mount");
     refreshView();
-  }, []);
+  }, [user]);
 
   async function refreshView() {
+    await refreshLickedKick();
     await refreshKickData();
   }
 
@@ -28,6 +30,18 @@ function Home() {
       .then((data) => {
         if (data.result) {
           setKickData(data.kicks);
+        }
+      })
+      .then(console.log("kickData refreshed"));
+  }
+
+  async function refreshLickedKick() {
+    fetch(`${BACKEND_URL}/users/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          console.log(data);
+          setLickedKick(data.user.likedKicks);
         }
       });
   }
@@ -64,7 +78,7 @@ function Home() {
           message={k.message}
           nbLikes={k.nbLikes}
           sentAt={k.sentAtTimestamp}
-          isLiked={user.likedKicks.includes(k._id)}
+          isLiked={lickedKick.includes(k._id)}
           isAuthor={k.author.username === user.username}
           likeClicked={likeClicked}
           deleteClicked={deleteClicked}
