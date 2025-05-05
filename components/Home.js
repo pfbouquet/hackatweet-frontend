@@ -66,6 +66,9 @@ function Home() {
         message: textKick,
       }),
     });
+    setTextKick('');
+    setTextLength(0);
+    
     refreshView();
   }
 
