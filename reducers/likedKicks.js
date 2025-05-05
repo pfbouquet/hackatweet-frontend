@@ -8,7 +8,7 @@ export const likedKicksSlice = createSlice({
   name: "likedKicks",
   initialState,
   reducers: {
-    setLikedKicks: async (state, action) => {
+    setLikedKicks: (state, action) => {
       state.value = action.payload;
     },
   },

@@ -45,8 +45,7 @@ function Home() {
     let response = await fetch(`${BACKEND_URL}/users/${user.token}`);
     let data = await response.json();
     if (data.result) {
-      console.log(data.user.likedKicks);
-      await setLikedKicks(data.user.likedKicks);
+      dispatch(setLikedKicks(data.user.likedKicks));
     }
   }
 
@@ -74,7 +73,8 @@ function Home() {
     .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
     .map((k, i) => {
       return (
-        <Kick className={styles.kicks}
+        <Kick
+          className={styles.kicks}
           key={i}
           id={k._id}
           username={k.author.username}

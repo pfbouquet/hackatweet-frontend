@@ -61,18 +61,20 @@ function Kick(props) {
         </div>
         <p>{props.message}</p>
         <div className={styles.like}>
-          <FontAwesomeIcon
-            icon={faHeart}
-            className={`${props.isLiked && styles.liked}`}
-            onClick={() => hanleLikeClick()}
-          />
-          <p>{props.nbLikes}</p>
-          {props.isAuthor && (
+          <p>
             <FontAwesomeIcon
-              icon={faTrash}
-              onClick={() => handleDeleteClicked()}
+              icon={faHeart}
+              className={`${props.isLiked && styles.liked}`}
+              onClick={() => hanleLikeClick()}
             />
-          )}
+            {props.nbLikes}
+            {props.isAuthor && (
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={() => handleDeleteClicked()}
+              />
+            )}
+          </p>
         </div>
       </div>
     </>
