@@ -1,25 +1,25 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import styles from "../styles/Home.module.css";
 import Kick from "./Kick";
 import Trend from "./Trend";
 
 const BACKEND_URL = "http://localhost:3000";
-const usertoken = "2cjNXWW2eXL65DpRO3_QPh6npQE9K2Wi";
 
 function Home() {
   const [kickData, setKickData] = useState([]);
-  const [userData, setUserData] = useState([]);
   const [textKick, setTextKick] = useState([]);
   const [textLength, setTextLength] = useState(0);
+  const user = useSelector((store) => store.user.value);
 
   useEffect(() => {
     console.log("Mount");
     refreshView();
+    console.log(user);
   }, []);
 
   async function refreshView() {
-    await refreshUserData();
     await refreshKickData();
   }
 
@@ -29,16 +29,6 @@ function Home() {
       .then((data) => {
         if (data.result) {
           setKickData(data.kicks);
-        }
-      });
-  }
-
-  async function refreshUserData() {
-    fetch(`${BACKEND_URL}/users/${usertoken}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          setUserData(data.user);
         }
       });
   }
@@ -56,7 +46,7 @@ function Home() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        token: usertoken,
+        token: user.token,
         message: textKick,
       }),
     });
@@ -75,8 +65,8 @@ function Home() {
           message={k.message}
           nbLikes={k.nbLikes}
           sentAt={k.sentAtTimestamp}
-          isLiked={userData.likedKicks.includes(k._id)}
-          isAuthor={k.author.username === userData.username}
+          isLiked={user.likedKicks.includes(k._id)}
+          isAuthor={k.author.username === user.username}
           likeClicked={likeClicked}
           deleteClicked={deleteClicked}
         />
@@ -90,8 +80,8 @@ function Home() {
         <div className={styles.user}>
           <img className={styles.imgLogin} src="logo.webp" />
           <div className={styles.txtLogin}>
-            <h3>{userData.firstname}</h3>
-            <h4>@{userData.username}</h4>
+            <h3>{user.firstname}</h3>
+            <h4>@{user.username}</h4>
           </div>
         </div>
       </div>

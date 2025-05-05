@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import styles from "../styles/Sign.module.css";
-//import SignInModal from "../components/SignInModal";
-// import { Modal, Input, Button } from 'antd';
 
 import dynamic from "next/dynamic";
-const SignInModal = dynamic(() => import("../components/SignInModal"), { ssr: false });
-const SignUpModal = dynamic(() => import("../components/SignUpModal"), { ssr: false });
+const SignInModal = dynamic(() => import("../components/SignInModal"), {
+  ssr: false,
+});
+const SignUpModal = dynamic(() => import("../components/SignUpModal"), {
+  ssr: false,
+});
 
 const Sign = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -23,14 +25,24 @@ const Sign = () => {
       </div>
 
       <div className={styles.rightPanel}>
-        <img src="logo_white.webp" alt="Small Logo" className={styles.smallLogo} />
+        <img
+          src="logo_white.webp"
+          alt="Small Logo"
+          className={styles.smallLogo}
+        />
         <h1 className={styles.title}>Vient kicker avec Jean Claude</h1>
         <h2 className={styles.subtitle}>Join JCV kicks</h2>
-        <button className={`${styles.btn} ${styles.primary}`}onClick={showModal}>
+        <button
+          className={`${styles.btn} ${styles.primary}`}
+          onClick={showModal}
+        >
           Kick up
         </button>
         <p className={styles.accountText}>Tu as déjà un account?</p>
-        <button className={`${styles.btn} ${styles.secondary}`} onClick={showModalIn}>
+        <button
+          className={`${styles.btn} ${styles.secondary}`}
+          onClick={showModalIn}
+        >
           Kick in
         </button>
       </div>

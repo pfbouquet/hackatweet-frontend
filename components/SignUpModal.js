@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { Modal, Input, Button } from 'antd';
-import styles from '../styles/SignUpModal.module.css';
-import { useRouter } from 'next/router';
-
-// import { useDispatch, useSelector } from 'react-redux';
-// import { login, logout } from '../reducers/user';
+import React, { useState } from "react";
+import { Modal, Input, Button } from "antd";
+import styles from "../styles/SignUpModal.module.css";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { login } from "../reducers/user";
 
 const SignUpModal = ({ visible, onCancel }) => {
+  const [signUpUsername, setSignUpUsername] = useState("");
+  const [signUpPassword, setSignUpPassword] = useState("");
+  const [signUpKickername, setSignUpKickername] = useState("");
   const router = useRouter();
-  const [signUpUsername, setSignUpUsername] = useState('');
-  const [signUpPassword, setSignUpPassword] = useState('');
-  const [signUpKickername, setSignUpKickername] = useState('');
+  const dispatch = useDispatch();
 
   const handleSignUp = async () => {
     const payload = {
@@ -20,28 +20,38 @@ const SignUpModal = ({ visible, onCancel }) => {
     };
 
     try {
-      const response = await fetch('http://localhost:3000/users/kickup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("http://localhost:3000/users/kickup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
 
       const data = await response.json();
 
       if (data.result) {
-        setSignUpUsername('');
-        setSignUpPassword('');
-        setSignUpKickername('');
-        router.push('/home'); // ← Redirection ici mais je ne sais si c'est la bonne page.... pas malin le mec
+        dispatch(
+          login({
+            firstname: data.firstname,
+            token: data.token,
+            username: data.username,
+            likedKicks: [],
+          })
+        );
+        // ✅ Réinitialise les champs et erreurs
+        setSignUpUsername("");
+        setSignUpPassword("");
+        setSignUpKickername("");
+        router.push("/home");
       } else {
+        // 🔴 Affiche une erreur utilisateur
         console.error("Erreur backend :", data);
       }
-
     } catch (error) {
+      // 🔴 Affiche une erreur
       console.error("Erreur fetch :", error);
     }
   };
-  
+
   return (
     <Modal
       open={visible}
@@ -72,7 +82,11 @@ const SignUpModal = ({ visible, onCancel }) => {
           onChange={(e) => setSignUpPassword(e.target.value)}
           value={signUpPassword}
         />
-        <Button type="primary" className={styles.signupButton} onClick={handleSignUp}>
+        <Button
+          type="primary"
+          className={styles.signupButton}
+          onClick={handleSignUp}
+        >
           Kick up
         </Button>
       </div>
