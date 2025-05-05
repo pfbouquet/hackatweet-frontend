@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import styles from "../styles/Home.module.css";
-import Kick from "./Kick";
 import Trend from "./Trend";
+import Sidebar from "./Sidebar";
 
 const BACKEND_URL = "http://localhost:3000";
 
@@ -12,7 +12,7 @@ function Hashtag() {
   const [textKick, setTextKick] = useState([]);
   const [textLength, setTextLength] = useState(0);
   const [lickedKick, setLickedKick] = useState([]);
-  const [trendsData, setTrendsData] = useState([])
+  const [trendsData, setTrendsData] = useState([]);
   const user = useSelector((store) => store.user.value);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function Hashtag() {
 
   async function refreshView() {
     await refreshLickedKick();
-    await refreshKickData()
+    await refreshKickData();
     seeTrends();
   }
 
@@ -66,7 +66,7 @@ function Hashtag() {
       }),
     });
     refreshView();
-    }
+  }
 
   // let kicks = kickData
   //   .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
@@ -89,37 +89,30 @@ function Hashtag() {
   //   });
 
   //fetch for grab DB informations
-  function seeTrends(){
-      fetch(`${BACKEND_URL}/trends`)
-      .then(response => response.json())
-      .then(data => {
-        setTrendsData(data.trends)
-      })
-      
+  function seeTrends() {
+    fetch(`${BACKEND_URL}/trends`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTrendsData(data.trends);
+      });
   }
 
   //reorder trends by number of trends
-  const orderTrends = trendsData.sort((a, b) => b.kicks.length - a.kicks.length).slice(0,5)
+  const orderTrends = trendsData
+    .sort((a, b) => b.kicks.length - a.kicks.length)
+    .slice(0, 5);
   // filter trends if there is 0 kick
-  const filterZeroTrends = orderTrends.filter((data) => data.kicks.length !== 0)
+  const filterZeroTrends = orderTrends.filter(
+    (data) => data.kicks.length !== 0
+  );
   //map order
-  const allTrends = filterZeroTrends.map((data,i)=>{
-    return <Trend key={i} name={data.name} kicks={data.kicks.length}/>
-  })
-  
+  const allTrends = filterZeroTrends.map((data, i) => {
+    return <Trend key={i} name={data.name} kicks={data.kicks.length} />;
+  });
 
   return (
     <div className={styles.container}>
-      <div className={styles.leftContainer}>
-        <img src="logo.webp" className={styles.logo} />
-        <div className={styles.user}>
-          <img className={styles.imgLogin} src="logo.webp" />
-          <div className={styles.txtLogin}>
-            <h3>{user.firstname}</h3>
-            <h4>@{user.username}</h4>
-          </div>
-        </div>
-      </div>
+      <Sidebar />
 
       <div className={styles.middleContainer}>
         <div className={styles.addKick}>
@@ -135,7 +128,6 @@ function Hashtag() {
               setTextLength(e.target.value.length);
             }}
           ></textarea>
-
         </div>
 
         {/* <div className={styles.feed}>{kicks}</div> */}
