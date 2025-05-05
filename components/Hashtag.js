@@ -20,15 +20,14 @@ function Hashtag() {
   const likedKicks = useSelector((store) => store.likedKicks.value);
   const dispatch = useDispatch();
 
-console.log(text,trendsData,user)
-
   useEffect(() => {
     console.log("Mount");
     refreshView();
+    setText(trend)
   }, [user, trend]);
 
   async function refreshView() {
-    // await refreshLickedKick();
+    await refreshLickedKick();
     await refreshKickData()
     seeTrends();
   }
@@ -44,20 +43,20 @@ console.log(text,trendsData,user)
       .then(console.log("kickData refreshed", kicksData));
   }
 
-  // async function refreshLickedKick() {
-  //   fetch(`${BACKEND_URL}/users/${user.token}`)
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.result) {
-  //         console.log(data);
-  //         setLickedKick(data.user.likedKicks);
-  //       }
-  //     });
-  // }
+  async function refreshLickedKick() {
+    fetch(`${BACKEND_URL}/users/${user.token}`)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          console.log(data);
+          dispatch(setLikedKicks(data.user.likedKicks));
+        }
+      });
+  }
 
-  // async function likeClicked() {
-  //   refreshView();
-  // }
+  async function likeClicked() {
+    refreshView();
+  }
 
   async function deleteClicked() {
     refreshView();
@@ -81,9 +80,9 @@ console.log(text,trendsData,user)
           message={k.message}
           nbLikes={k.nbLikes}
           sentAt={k.sentAtTimestamp}
-          // isLiked={lickedKick.includes(k._id)}
+          isLiked={likedKicks.includes(k._id)}
           isAuthor={k.author.username === user.username}
-          // likeClicked={likeClicked}
+          likeClicked={likeClicked}
           deleteClicked={deleteClicked}
         />
       );
