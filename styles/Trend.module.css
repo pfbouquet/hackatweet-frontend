@@ -1,5 +1,9 @@
 .eachTrend{
+    cursor: pointer;
+}
 
+.eachTrend:hover{
+    background-color: black;
 }
 
 .h3{
