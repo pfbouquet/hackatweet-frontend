@@ -63,7 +63,7 @@ function Hashtag() {
     refreshView();
   }
 
-  let filterTrend= trendsData.filter((e) => text === e.name)[0]
+  let filterTrend= trendsData.filter((e) => text.toLowerCase() === e.name.toLowerCase())[0]
   console.log('filterTREND',filterTrend)
 
   let kicks=[]
