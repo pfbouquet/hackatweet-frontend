@@ -1380,6 +1380,11 @@ convert-source-map@^2.0.0:
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-2.0.0.tgz#4b560f649fc4e918dd0ab75cf4961e8bc882d82a"
   integrity sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==
 
+cookie@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-1.0.2.tgz#27360701532116bd3f1f9416929d176afe1e4610"
+  integrity sha512-9Kr/j4O16ISv8zBBhJoi4bXOYNTkFLOqSL3UDB0njXxCXNezjeyVrJyGOWtgfs/q2km1gwBcfH8q1yEGoMYunA==
+
 copy-to-clipboard@^3.2.0:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/copy-to-clipboard/-/copy-to-clipboard-3.3.3.tgz#55ac43a1db8ae639a4bd99511c148cdd1b83a1b0"
@@ -3525,6 +3530,22 @@ react-redux@^9.2.0:
     "@types/use-sync-external-store" "^0.0.6"
     use-sync-external-store "^1.4.0"
 
+react-router-dom@^7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-7.5.3.tgz#496e9f6d90f731703c7772668b41747028e0a2d5"
+  integrity sha512-cK0jSaTyW4jV9SRKAItMIQfWZ/D6WEZafgHuuCb9g+SjhLolY78qc+De4w/Cz9ybjvLzShAmaIMEXt8iF1Cm+A==
+  dependencies:
+    react-router "7.5.3"
+
+react-router@7.5.3:
+  version "7.5.3"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-7.5.3.tgz#9e5420832af8c3690740c1797d4fa54613fea06d"
+  integrity sha512-3iUDM4/fZCQ89SXlDa+Ph3MevBrozBAI655OAfWQlTm9nBR0IKlrmNwFow5lPHttbwvITZfkeeeZFP6zt3F7pw==
+  dependencies:
+    cookie "^1.0.1"
+    set-cookie-parser "^2.6.0"
+    turbo-stream "2.4.0"
+
 react@18.1.0:
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.1.0.tgz#6f8620382decb17fdc5cc223a115e2adbf104890"
@@ -3683,6 +3704,11 @@ set-blocking@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/set-blocking/-/set-blocking-2.0.0.tgz#045f9782d011ae9a6803ddd382b24392b3d890f7"
   integrity sha512-KiKBS8AnWGEyLzofFfmvKwpdPzqiy16LvQfK3yv/fVH7Bj13/wl3JSR1J+rfgRE9q7xUJK4qvgS8raSOeLUehw==
+
+set-cookie-parser@^2.6.0:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/set-cookie-parser/-/set-cookie-parser-2.7.1.tgz#3016f150072202dfbe90fadee053573cc89d2943"
+  integrity sha512-IOc8uWeOZgnb3ptbCURJWNjWUPcO3ZnTTdzsurqERrP6nPyv+paC55vJM0LpOlT2ne+Ix+9+CRG1MNLlyZ4GjQ==
 
 set-function-length@^1.2.2:
   version "1.2.2"
@@ -3983,6 +4009,11 @@ tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/tr46/-/tr46-0.0.3.tgz#8184fd347dac9cdc185992f3a6622e14b9d9ab6a"
   integrity sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==
+
+turbo-stream@2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/turbo-stream/-/turbo-stream-2.4.0.tgz#1e4fca6725e90fa14ac4adb782f2d3759a5695f0"
+  integrity sha512-FHncC10WpBd2eOmGwpmQsWLDoK4cqsA/UT/GqNoaKOQnT8uzhtCbg3EoUDMvqpOSAI0S26mr0rkjzbOO6S3v1g==
 
 type-detect@4.0.8:
   version "4.0.8"

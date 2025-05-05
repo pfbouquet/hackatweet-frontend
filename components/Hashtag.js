@@ -4,6 +4,7 @@ import { setTrendsData } from "../reducers/trendsData";
 import { setKicksData } from "../reducers/kicksData";
 import { setLikedKicks } from "../reducers/likedKicks";
 import { clickTrend } from "../reducers/trend";
+import Link from 'next/link';
 
 import styles from "../styles/Hashtag.module.css";
 import Kick from "./Kick";
@@ -118,6 +119,7 @@ function Hashtag() {
 
       <div className={styles.middleContainer}>
         <div className={styles.addKick}>
+          <h2 className={styles.H2}><Link href="/home"><a className={styles.link}>Home</a></Link></h2>
           <h2 className={styles.H2}>Hashtag</h2>
           <input className={styles.input} type="text" onChange={(e)=> setText(e.target.value)} value={text} />
         </div>
