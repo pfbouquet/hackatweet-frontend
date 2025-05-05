@@ -33,7 +33,6 @@ const SignInModal = ({ visible, onCancel }) => {
             firstname: data.user.firstname,
             token: data.user.token,
             username: data.user.username,
-            likedKicks: data.user.likedKicks,
           })
         );
         // ✅ Réinitialise les champs et erreurs

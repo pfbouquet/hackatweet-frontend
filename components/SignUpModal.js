@@ -31,10 +31,9 @@ const SignUpModal = ({ visible, onCancel }) => {
       if (data.result) {
         dispatch(
           login({
-            firstname: data.firstname,
-            token: data.token,
-            username: data.username,
-            likedKicks: [],
+            firstname: data.user.firstname,
+            token: data.user.token,
+            username: data.user.username,
           })
         );
         // ✅ Réinitialise les champs et erreurs
