@@ -11,7 +11,7 @@ export const trendSlice = createSlice({
   initialState,
   reducers: {
     clickTrend:(state,action) => {
-        state.value = action.payload.name
+        state.value = action.payload
         console.log("reducer trend modified")
     }
   },
