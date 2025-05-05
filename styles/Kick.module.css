@@ -35,8 +35,17 @@
 .like {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 
 .liked {
   color: red;
+}
+
+.notLiked{
+  margin-right: 5px;
+}
+
+.trash{
+  margin-left: 5px;
 }
