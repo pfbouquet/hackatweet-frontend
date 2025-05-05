@@ -8,6 +8,7 @@ import { clickTrend } from "../reducers/trend";
 import styles from "../styles/Hashtag.module.css";
 import Kick from "./Kick";
 import Trend from "./Trend";
+import Sidebar from "./Sidebar";
 
 const BACKEND_URL = "http://localhost:3000";
 
@@ -28,7 +29,7 @@ function Hashtag() {
 
   async function refreshView() {
     await refreshLickedKick();
-    await refreshKickData()
+    await refreshKickData();
     seeTrends();
   }
 
@@ -91,13 +92,12 @@ function Hashtag() {
   
 
   //fetch for grab DB informations
-  function seeTrends(){
-      fetch(`${BACKEND_URL}/trends`)
-      .then(response => response.json())
-      .then(data => {
-        setTrendsData(data.trends)
-      })
-        console.log(trendsData)
+  function seeTrends() {
+    fetch(`${BACKEND_URL}/trends`)
+      .then((response) => response.json())
+      .then((data) => {
+        setTrendsData(data.trends);
+      });
   }
 
 
@@ -114,16 +114,7 @@ function Hashtag() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.leftContainer}>
-        <img src="logo_white.webp" className={styles.logo} />
-        <div className={styles.user}>
-          <img className={styles.imgLogin} src="logo.webp" />
-          <div className={styles.txtLogin}>
-            <h3 className={styles.H3}>{user.firstname}</h3>
-            <h4 className={styles.H4}>@{user.username}</h4>
-          </div>
-        </div>
-      </div>
+      <Sidebar />
 
       <div className={styles.middleContainer}>
         <div className={styles.addKick}>
