@@ -1,5 +1,6 @@
 .H2{
     color: rgb(228, 226, 232);
+    text-decoration: none;
 }
 
 .H3{
@@ -13,6 +14,15 @@
 .txtLogin{
     color: rgb(228, 226, 232);
 }
+
+.link {
+    color: inherit; /* hérite la couleur du parent, ici H2 */
+    text-decoration: none; /* enlève le soulignement */
+  }
+  
+  .link:hover {
+    text-decoration: underline; /* effet au survol, optionnel */
+  }
 
 .container {
     height: 100vh;
@@ -78,6 +88,12 @@
     color: rgb(228, 226, 232);
     overflow-y: auto;
     z-index: 1000;
+}
+
+.input{
+    color: black;
+    resize: none;
+    overflow: hidden;
 }
 
 .kicks{
