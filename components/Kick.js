@@ -64,12 +64,12 @@ function Kick(props) {
           <p>
             <FontAwesomeIcon
               icon={faHeart}
-              className={`${props.isLiked && styles.liked}`}
+              className={`${styles.notLiked} ${props.isLiked && styles.liked }`}
               onClick={() => hanleLikeClick()}
-            />
+            /> 
             {props.nbLikes}
             {props.isAuthor && (
-              <FontAwesomeIcon
+              <FontAwesomeIcon className={styles.trash}
                 icon={faTrash}
                 onClick={() => handleDeleteClicked()}
               />
