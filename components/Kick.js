@@ -26,7 +26,6 @@ function formatRelativeTime(timestamp) {
 function Kick(props) {
   const user = useSelector((store) => store.user.value);
   let kickedAgo = formatRelativeTime(props.sentAt);
-  let userPic = "logo.webp";
 
   async function hanleLikeClick() {
     // update DB
@@ -55,7 +54,11 @@ function Kick(props) {
     <>
       <div className={styles.kick}>
         <div className={styles.kicker}>
-          <img className={styles.imgLogin} src={userPic} />
+          <img
+            className={styles.imgLogin}
+            src={`profile-pics/${props.username}.png`}
+            alt={props.username}
+          />
           <h3 className={styles.H3}>{props.firstname}</h3>
           <h4 className={styles.H3}>{`@${props.username} - ${kickedAgo}`}</h4>
         </div>

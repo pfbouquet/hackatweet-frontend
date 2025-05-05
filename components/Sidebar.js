@@ -27,7 +27,10 @@ function Sidebar() {
       />
       {user.username != null && (
         <div className={styles.user}>
-          <img className={styles.imgLogin} src="logo.webp" />
+          <img
+            className={styles.imgLogin}
+            src={`profile-pics/${user.username}.png`}
+          />
           <div className={styles.txtLogin}>
             <h3 className={styles.H3}>{user.firstname}</h3>
             <h4 className={styles.H4}>@{user.username}</h4>
