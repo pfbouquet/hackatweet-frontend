@@ -1,7 +1,7 @@
 import Hashtag from '../components/Hashtag';
 
-function hashtag() {
+function PageHashtag() {
   return <Hashtag />;
 }
 
-export default hashtag;
+export default PageHashtag;
