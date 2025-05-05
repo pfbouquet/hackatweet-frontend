@@ -9,8 +9,11 @@ function Kick(props){
     return (
         <>
             <div className={styles.eachTrend} onClick={()=> dispatch(clickTrend(props.name))}>
+               <div className={styles.trendBloc}> 
                 <h3 className={styles.h3}>{props.name}</h3>
                 <h4 className={styles.h4}>{props.kicks} kicks</h4>
+                </div>
+            
             </div>
         </>
     )
