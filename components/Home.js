@@ -74,7 +74,7 @@ function Home() {
     .sort((a, b) => b.sentAtTimestamp - a.sentAtTimestamp)
     .map((k, i) => {
       return (
-        <Kick
+        <Kick className={styles.kicks}
           key={i}
           id={k._id}
           username={k.author.username}
@@ -113,19 +113,19 @@ function Home() {
   return (
     <div className={styles.container}>
       <div className={styles.leftContainer}>
-        <img src="logo.webp" className={styles.logo} />
+        <img src="logo_white.webp" className={styles.logo} />
         <div className={styles.user}>
           <img className={styles.imgLogin} src="logo.webp" />
           <div className={styles.txtLogin}>
-            <h3>{user.firstname}</h3>
-            <h4>@{user.username}</h4>
+            <h3 className={styles.H3}>{user.firstname}</h3>
+            <h4 className={styles.H4}>@{user.username}</h4>
           </div>
         </div>
       </div>
 
       <div className={styles.middleContainer}>
         <div className={styles.addKick}>
-          <h2>Home</h2>
+          <h2 className={styles.H2}>Home</h2>
           <textarea
             className={styles.textKick}
             rows="5"
@@ -149,7 +149,7 @@ function Home() {
       </div>
 
       <div className={styles.rightContainer}>
-        <h2>Trends</h2>
+        <h2 className={styles.H2}>Trends</h2>
         <div className={styles.blockTrends}>{allTrends}</div>
       </div>
     </div>
