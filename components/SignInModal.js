@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Modal, Input, Button } from "antd";
 import styles from "../styles/SignInModal.module.css";
+// import {Link} from react
+// import { }
 import { useRouter } from "next/router";
 
 const SignInModal = ({ visible, onCancel }) => {
@@ -45,18 +47,8 @@ const SignInModal = ({ visible, onCancel }) => {
       <div className={styles.content}>
         <img src="/logo_white.webp" alt="Logo" className={styles.logo} />
         <h2>Kicknect toi sur ton account</h2>
-        <Input
-          placeholder="Kickername"
-          className={styles.input}
-          onChange={(e) => setSignInKickername(e.target.value)}
-          value={signInKickername}
-        />
-        <Input.Password
-          placeholder="JCVDMDP"
-          className={styles.inputpassword}
-          onChange={(e) => setSignInPassword(e.target.value)}
-          value={signInPassword}
-        />
+        <Input placeholder="Kickername" className={styles.input} onChange={(e) => setSignInKickername(e.target.value)} value={signInKickername} />
+        <Input.Password placeholder="JCVDMDP" className={styles.inputpassword} onChange={(e) => setSignInPassword(e.target.value)} value={signInPassword} />
         {errorMessage && <p className={styles.error}>{errorMessage}</p>} {/* 🔴 Message d’erreur */}
         <Button type="primary" className={styles.signupButton} onClick={handleSignIn}>
           Kick in
